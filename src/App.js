@@ -1,4 +1,5 @@
 import React from "react";
+import { CardList } from "./components/card-list/card-list.component";
 import "./App.css";
 
 class App extends React.Component {
@@ -13,10 +14,14 @@ class App extends React.Component {
           monsters: users
         })
       );
+    console.log("App ", this.props.children);
   }
-  renderMoster = monster => <h1 key={monster.id}>{monster.name}</h1>;
   render() {
-    return <div>{this.state.monsters.map(this.renderMoster)}</div>;
+    return (
+      <div>
+        <CardList monsters={this.state.monsters} />
+      </div>
+    );
   }
 }
 
