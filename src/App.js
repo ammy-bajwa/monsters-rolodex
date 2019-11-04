@@ -4,7 +4,8 @@ import "./App.css";
 
 class App extends React.Component {
   state = {
-    monsters: []
+    monsters: [],
+    searchField: ""
   };
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -18,7 +19,24 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="App">
+        <input
+          type="search"
+          placeholder="Search Monsters"
+          onChange={e =>
+            this.setState(
+              {
+                searchField: e.target.value
+              },
+              () =>
+                this.setState(prevState => ({
+                  monsters: prevState.monsters.filter(monster =>
+                    monster.name.includes(this.state.searchField)
+                  )
+                }))
+            )
+          }
+        />
         <CardList monsters={this.state.monsters} />
       </div>
     );
